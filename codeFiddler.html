@@ -1,0 +1,131 @@
+<html>
+<head>
+	<title>Code Fiddler</title>
+	<link rel="stylesheet" href="bootstrap.css">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+
+</head>
+<body>
+	<style>
+		body {
+			background: lightblue;
+			background: -webkit-linear-gradient(left, lightblue, lightgreen);
+			background: -o-linear-gradient(left, lightblue, lightgreen);
+			background: -moz-linear-gradient(left, lightblue, lightgreen)
+			background: linear-gradient(to right, lightblue, lightgreen);
+			font-family: 'Raleway', sans-serif;;
+		}
+		.box {
+			border: 1px solid lightgray;
+			width: 100%;
+			height: 50% !important;
+			outline: none !important;
+			-webkit-box-shadow: none !important;
+			-moz-box-shadow: none !important;
+			box-shadow: none !important;
+			padding: 15px;
+		}
+
+		textarea {
+			resize: none;
+			text-align: left;
+		}
+
+		h3 {
+			margin-top: 0;
+			font-family: 'Raleway', sans-serif;
+		}
+
+		.sectionBody {
+			margin-bottom: 15px;
+		}
+
+		#cssSection, #javascriptSection {
+			display: none;
+		}
+
+		iframe {
+			background-color: white;
+		}
+
+
+	</style>
+
+	<header>
+		<nav id="navHeader" class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Code Fiddler</a>
+				</div>
+
+				<ul class="nav navbar-nav">
+					<li role="presentation" class="nav-section active"><a href="#htmlSection">HTML</a></li>
+					<li role="presentation" class="nav-section"><a href="#cssSection">CSS</a></li>
+					<li role="presentation" class="nav-section"><a href="#javascriptSection">JavaScript</a></li>
+					<li role="presentation" class="nav-section active"><a href="#resultSection">Result</a></li>
+				</ul>
+
+
+			</div>
+		</nav>
+	</header>
+	<section>
+		<div class="container-fluid">
+
+			<div id="htmlSection" class="col-xs-12 col-sm-6 sectionBody">
+				<h3 class="text-center">HTML</h3>
+				<textarea id="htmlContent" class="form-control box"></textarea>
+			</div>
+
+			<div id="cssSection" class="col-xs-12 col-sm-6 sectionBody">
+				<h3 class="text-center">CSS</h3>
+				<textarea id="cssContent" class="form-control box"></textarea>
+			</div>
+			<div id="javascriptSection" class="col-xs-12 col-sm-6 sectionBody">
+				<h3 class="text-center">JavaScript</h3>
+				<textarea id="javascriptContent" class="form-control box"></textarea>
+			</div>
+			<div id="resultSection" class="col-xs-12 col-sm-6 sectionBody">
+				<h3 class="text-center">Result</h3>
+				<iframe id="outputFrame" class="box"></iframe>
+			</div>
+
+		</div>
+	</section>
+	<script src="jquery.js"></script>
+	<script src="bootstrap.js"></script>
+	<script type="text/javascript">
+
+		$('#htmlContent, #cssContent').on("change keyup paste", function() {
+			var bodyContent = $('#htmlContent').val();
+			var cssContent = $('#cssContent').val();
+			var html = "<html><head><style>" + cssContent + "</style></head><body>" + bodyContent + "</body></html>";
+
+			// update iframe document content
+			$('#outputFrame').contents().find('html').html(html);
+
+			updateJS();
+		});
+
+		$('#javascriptContent').on('change', updateJS);
+
+		// apply JS to iframe
+		// NOT SAFE !!!
+		function updateJS() {
+			document.getElementById("outputFrame").contentWindow.eval($("#javascriptContent").val());
+		}
+
+		$('.nav-section').click(function() {
+			var id = $(this).find('a').attr('href');
+			if ($(this).hasClass('active')) {
+				$(this).removeClass('active');
+				$(id).hide();
+			} else {
+				$(this).addClass('active');
+				$(id).show();				
+			}
+		});
+
+	</script>
+</body>
+</html>
