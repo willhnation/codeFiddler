@@ -3,72 +3,21 @@
 	<title>Code Fiddler</title>
 	<link rel="stylesheet" href="bootstrap.css">
 	<link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="codeFiddler.css">
 
 </head>
 <body>
-	<style>
-		body {
-			background: lightblue;
-			background: -webkit-linear-gradient(left, lightblue, lightgreen);
-			background: -o-linear-gradient(left, lightblue, lightgreen);
-			background: -moz-linear-gradient(left, lightblue, lightgreen)
-			background: linear-gradient(to right, lightblue, lightgreen);
-			font-family: 'Raleway', sans-serif;;
-		}
-		.box {
-			border: 1px solid lightgray;
-			width: 100%;
-			height: 50% !important;
-			outline: none !important;
-			-webkit-box-shadow: none !important;
-			-moz-box-shadow: none !important;
-			box-shadow: none !important;
-			padding: 15px;
-		}
-
-		textarea {
-			resize: none;
-			text-align: left;
-		}
-
-		h3 {
-			margin-top: 0;
-			font-family: 'Raleway', sans-serif;
-		}
-
-		.sectionBody {
-			margin-bottom: 15px;
-		}
-
-		#cssSection, #javascriptSection {
-			display: none;
-		}
-
-		iframe {
-			background-color: white;
-		}
-
-
-	</style>
 
 	<header>
-		<nav id="navHeader" class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">Code Fiddler</a>
-				</div>
-
-				<ul class="nav navbar-nav">
-					<li role="presentation" class="nav-section active"><a href="#htmlSection">HTML</a></li>
-					<li role="presentation" class="nav-section"><a href="#cssSection">CSS</a></li>
-					<li role="presentation" class="nav-section"><a href="#javascriptSection">JavaScript</a></li>
-					<li role="presentation" class="nav-section active"><a href="#resultSection">Result</a></li>
-				</ul>
-
-
-			</div>
-		</nav>
+		<h1 class="text-center">Code Fiddler</h1>
+		<div id="buttonRow">
+				<a href="#htmlSection" class="sectionBtn active">HTML</a>
+				<a href="#cssSection" class="sectionBtn">CSS</a>
+				<a href="#javascriptSection" class="sectionBtn">JavaScript</a>
+				<a href="#resultSection" class="sectionBtn active">Result</a>
+		</div>
 	</header>
+
 	<section>
 		<div class="container-fluid">
 
@@ -115,8 +64,9 @@
 			document.getElementById("outputFrame").contentWindow.eval($("#javascriptContent").val());
 		}
 
-		$('.nav-section').click(function() {
-			var id = $(this).find('a').attr('href');
+		$('.sectionBtn').click(function(e) {
+			e.preventDefault();
+			var id = $(this).attr('href');
 			if ($(this).hasClass('active')) {
 				$(this).removeClass('active');
 				$(id).hide();
