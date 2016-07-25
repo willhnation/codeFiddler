@@ -57,12 +57,12 @@ textarea, iframe {
 	text-decoration: none;
 }
 
-.sectionBtn:active, .sectionBtn:hover {
+.sectionBtn:active, .sectionBtn:hover, .sectionBtn:focus {
 	color: white;
 }
 
 .sectionBtn.active {
-	color: yellow;
+	color: lightyellow;
 }
 
 h1 {
